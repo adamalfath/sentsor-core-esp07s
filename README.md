@@ -23,6 +23,7 @@ SENTSOR Core Board ESP-07S merupakan development board yang dioptimasi untuk mel
 - **TP4054 Battery Charger**, charge baterai dengan arus up to 500mA.  
 - **DW01A Battery Protection**, pengamanan saat penggunaan baterai terhadap overcharge, overdischarge, overcurrent, dan short circuit.  
 - **ME6211 LDO**, dengan VIN max. 6V dan IOUT max. 500mA. Kompatibel untuk dihubungkan dengan solar cell sebagai power input charger.  
+- **11 pin GPIO** @3V3 level, 1xUART, 1xSPI, 1xI2C, 1xI2S, plus 1x10bit ADC. Silahkan lihat gambar diatas untuk lebih lanjut.  
 - **Built-in Voltage Divider**, 0.1% precision resistor divider rasio 1/5 pada pin ADC1 yang terhubung ke internal ADC0 memungkinkan untuk melakukan sensing tegangan up to 5V. Kompatibel untuk monitoring tegangan VBAT sebagai metode estimasi kapasitas baterai.  
 
 ## How to Use
