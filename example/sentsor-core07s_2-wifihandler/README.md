@@ -1,0 +1,1 @@
+Description: Handle WiFi connectivity: connecting to assigned AP, connection check, automatic reconnect

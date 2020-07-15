@@ -1,0 +1,1 @@
+Description: Measure voltage from JST-PH connector/VBAT pin

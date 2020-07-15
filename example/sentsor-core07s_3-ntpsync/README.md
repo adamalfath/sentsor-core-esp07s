@@ -1,0 +1,1 @@
+Description: Sync on-board RTC with NTP
