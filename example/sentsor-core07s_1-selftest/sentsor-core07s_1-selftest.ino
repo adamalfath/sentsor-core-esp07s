@@ -60,7 +60,7 @@ void setup() {
     delay(500);
   }
 
-  //SD test: SD init with slave select (SS) at pin 10, write/read/delete file
+  //SD test: SD init with slave select (SS) at pin IO5, write/read/delete file
   DEBUG_OUT(F("DEBUG >> Initializing memory card... "));
   if(sd.begin(ssPin)) {
     DEBUG_OUT(F("OK\n"));
@@ -118,7 +118,7 @@ void setup() {
     delay(500);
   }
 
-  //Blink onboard LED at pin 2
+  //Blink onboard LED at pin IO2
   DEBUG_OUT(F("DEBUG >> Configuring pin IO2 as output for onboard LED\n"));
   pinMode(onboardLed,OUTPUT);
   DEBUG_OUT(F("DEBUG >> Onboard LED should blink 3 times"));
