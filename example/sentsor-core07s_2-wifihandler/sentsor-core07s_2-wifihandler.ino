@@ -18,8 +18,8 @@
 #define DEBUG_OUT(msg) Serial.print(msg)
 #define onboardLed 2
 //WiFi credentials
-#define WIFI_SSID "//SENTSOR//"
-#define WIFI_PASSWORD "140310140052"
+#define WIFI_SSID "WIFI_SSID"
+#define WIFI_PASSWORD "WIFI_PASSWORD"
 //Connection parameter
 #define CONNECTION_TIMEOUT 5000UL
 #define RETRY_ATTEMP 3
