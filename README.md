@@ -28,7 +28,7 @@ SENTSOR Core Board ESP-07S merupakan development board yang dioptimasi untuk mel
 
 ## How to Use
 ### Programming & Uploading Firmware
-SENTSOR Core Board ESP-07S memerlukan programmer external (USB to UART) untuk mengupload firmwarenya seperti FT232 CH340, CP2102 PL2303, dll. Untuk melakukan proses upload firmware, hubungkan chip programmer dengan board SENTSOR seperti berikut:
+SENTSOR Core Board ESP-07S memerlukan programmer external (USB to UART) untuk mengupload firmwarenya seperti FT232, CH340, CP2102, PL2303, dll. Untuk melakukan proses upload firmware, hubungkan chip programmer dengan board SENTSOR seperti berikut:
 |Programmer|SENTSOR board|
 |-|-|
 |+3V3 (atau +5V)|+3V3 (atau VIN)|
