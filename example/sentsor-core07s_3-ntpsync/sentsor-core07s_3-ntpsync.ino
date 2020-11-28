@@ -1,24 +1,23 @@
 /* =====================================================================
-   __  __      _____  ______  _   _  _______   _____   ____   _____ 
-   \ \ \ \    / ____||  ____|| \ | ||__   __| / ____| / __ \ |  __ \    
- __ \ \ \ \  | (___  | |__   |  \| |   | |   | (___  | |  | || |__) |   
- \ \ \ \ \_\  \___ \ |  __|  |     |   | |    \___ \ | |  | ||  _  /    
-  \ \ \ \     ____) || |____ | |\  |   | |    ____) || |__| || | \ \    
-   \_\ \_\   |_____/ |______||_| \_|   |_|   |_____/  \____/ |_|  \_\   
+   __  __      _____  ______  _   _  _______   _____   ____   _____
+   \ \ \ \    / ____||  ____|| \ | ||__   __| / ____| / __ \ |  __ \
+ __ \ \ \ \  | (___  | |__   |  \| |   | |   | (___  | |  | || |__) |
+ \ \ \ \ \_\  \___ \ |  __|  |     |   | |    \___ \ | |  | ||  _  /
+  \ \ \ \     ____) || |____ | |\  |   | |    ____) || |__| || | \ \
+   \_\ \_\   |_____/ |______||_| \_|   |_|   |_____/  \____/ |_|  \_\
 
  Project      : Core Board ESP-07S - NTP Sync
  Description  : Sync on-board RTC with NTP once
  Author       : SENTSOR
- Version      : 1.0.0 - Initial Build
  Note         : NTP-RTC sync also can be scheduled per given interval
- 
+
 ===================================================================== */
 
 #define DEBUG_OUT(msg) Serial.print(msg)
 #define onboardLed 2
 //WiFi credentials
-#define WIFI_SSID "//SENTSOR//"
-#define WIFI_PASSWORD "140310140052"
+#define WIFI_SSID "WIFI_SSID"
+#define WIFI_PASSWORD "WIFI_PASSWORD"
 //Connection parameter
 #define CONNECTION_TIMEOUT 5000UL
 #define RETRY_ATTEMP 3
@@ -32,21 +31,21 @@
 #include <RTClib.h>
 
 WiFiUDP ntpUDP;
-NTPClient ntp(ntpUDP,NTP_SERVER,TZ_OFFSET);
+NTPClient ntp(ntpUDP, NTP_SERVER, TZ_OFFSET);
 RTC_DS3231 rtc;
-boolean RTCsync=false;
+boolean RTCsync = false;
 
 void setup() {
-  Serial.begin(9600,SERIAL_8N1);
+  Serial.begin(9600, SERIAL_8N1);
   delay(500);
   DEBUG_OUT(F("\n"));
-  
-  pinMode(onboardLed,OUTPUT);
 
-  if(!rtc.begin()) {
+  pinMode(onboardLed, OUTPUT);
+
+  if (!rtc.begin()) {
     DEBUG_OUT(F("DEBUG >> RTC not initialized\n"));
     DEBUG_OUT(F("DEBUG >> Halt program\n"));
-    while(1) {
+    while (1) {
       //Do nothing if RTC failed to initialized
       heartbeat(3);
       delay(500);
@@ -57,12 +56,12 @@ void setup() {
 }
 
 void loop() {
-  if(connectionCheck()) {
+  if (connectionCheck()) {
     NTPsync();
-    
+
     static uint32_t lastMillis;
-    if(millis()-lastMillis>=1000L) {
-      lastMillis=millis();
+    if (millis() - lastMillis >= 1000L) {
+      lastMillis = millis();
       datetimeStream();
       heartbeat(1);
     }
@@ -75,7 +74,7 @@ void loop() {
 
 boolean initWiFi() {
   DEBUG_OUT(F("DEBUG >> WiFi initialization, restarting modem...\n"));
-  
+
   DEBUG_OUT(F("DEBUG >> Turning off WiFi... "));
   WiFi.mode(WIFI_OFF);
   WiFi.forceSleepBegin();
@@ -89,16 +88,16 @@ boolean initWiFi() {
   DEBUG_OUT(F("OK\n"));
 
   uint32_t startTimer;
-  for(uint8_t attemp=0;attemp<RETRY_ATTEMP;attemp++) {
-    DEBUG_OUT("DEBUG >> ATT:"+String(attemp+1)+" Connecting to AP... ");
-    WiFi.begin(WIFI_SSID,WIFI_PASSWORD);
-    startTimer=millis();
-    while(WiFi.status()!=WL_CONNECTED && millis()-startTimer<CONNECTION_TIMEOUT) {
+  for (uint8_t attemp = 0; attemp < RETRY_ATTEMP; attemp++) {
+    DEBUG_OUT("DEBUG >> ATT:" + String(attemp + 1) + " Connecting to AP... ");
+    WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
+    startTimer = millis();
+    while (WiFi.status() != WL_CONNECTED && millis() - startTimer < CONNECTION_TIMEOUT) {
       delay(100);
     }
-    if(WiFi.status()==WL_CONNECTED) {
+    if (WiFi.status() == WL_CONNECTED) {
       DEBUG_OUT(F("Connected\n"));
-      DEBUG_OUT("DEBUG >> IPv4="+WiFi.localIP().toString()+"\n");
+      DEBUG_OUT("DEBUG >> IPv4=" + WiFi.localIP().toString() + "\n");
       delay(100);
       return true;
     }
@@ -115,23 +114,23 @@ boolean initWiFi() {
 }
 
 boolean connectionCheck() {
-  if(WiFi.status()==WL_CONNECTED) return true;
+  if (WiFi.status() == WL_CONNECTED) return true;
   else return false;
 }
 
 boolean NTPsync() {
-  if(RTCsync) return true;
+  if (RTCsync) return true;
 
   uint32_t startTimer;
-  for(uint8_t attemp=0;attemp<RETRY_ATTEMP;attemp++) {
-    DEBUG_OUT("DEBUG >> ATT:"+String(attemp+1)+" Connecting to NTP server... ");
+  for (uint8_t attemp = 0; attemp < RETRY_ATTEMP; attemp++) {
+    DEBUG_OUT("DEBUG >> ATT:" + String(attemp + 1) + " Connecting to NTP server... ");
     ntp.begin();
-    startTimer=millis();
-    while(!RTCsync && millis()-startTimer<CONNECTION_TIMEOUT) {
-      if(ntp.update()) RTCsync=true;
+    startTimer = millis();
+    while (!RTCsync && millis() - startTimer < CONNECTION_TIMEOUT) {
+      if (ntp.update()) RTCsync = true;
       delay(100);
     }
-    if(RTCsync) {
+    if (RTCsync) {
       DEBUG_OUT(F("Connected\n"));
       rtc.adjust(DateTime(ntp.getEpochTime()));
       DEBUG_OUT(F("DEBUG >> RTC synced with NTP\n"));
@@ -153,7 +152,7 @@ boolean NTPsync() {
 
 void datetimeStream() {
   ntp.update();
-  DateTime time[2]={rtc.now(),ntp.getEpochTime()};
+  DateTime time[2] = {rtc.now(), ntp.getEpochTime()};
 
   DEBUG_OUT(F("DEBUG >> "));
   DEBUG_OUT(F("RTC "));
@@ -166,10 +165,10 @@ void datetimeStream() {
 
 void heartbeat(uint8_t n) {
   //Blink indicator LED for n-times
-  while(n>0) {
-    digitalWrite(onboardLed,LOW);
+  while (n > 0) {
+    digitalWrite(onboardLed, LOW);
     delay(10);
-    digitalWrite(onboardLed,HIGH);
+    digitalWrite(onboardLed, HIGH);
     delay(100);
     n--;
   }

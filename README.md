@@ -38,7 +38,7 @@ SENTSOR Core Board ESP-07S memerlukan programmer external (USB to UART) untuk me
 |DTR|DTR|
 |RTS|RTS|
 
-Selanjutnya pilih board _Generic ESP8266 Module_. Beberapa hal yang perlu diperhatikan yaitu ESP-07S memiliki ukuran flash sebesar 4MB (silahkan pilih kombinasi alokasi FS dan OTA sesuai keperluan), dan metode auto-reset dengan menggunakan pin DTR. Setelah itu SENTSOR Core Board ESP-07S dapat digunakan sebagaimana development board pada umumnya. 
+Selanjutnya pilih board _Generic ESP8266 Module_. Beberapa hal yang perlu diperhatikan yaitu ESP-07S memiliki ukuran flash sebesar 4MB (silahkan pilih kombinasi alokasi partisi FS dan OTA sesuai keperluan), dan metode auto-reset dengan menggunakan pin DTR. Setelah itu SENTSOR Core Board ESP-07S dapat digunakan sebagaimana development board pada umumnya. 
 
 <img src="https://github.com/adamalfath/sentsor-core-esp07s/blob/master/media/core07s-arduinoideinfo.png" width="600">  
 
