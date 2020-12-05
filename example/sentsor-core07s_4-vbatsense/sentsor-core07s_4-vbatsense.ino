@@ -19,12 +19,12 @@
 //ADC LSB in millivolt
 #define ADC_LSB 1000.0F/1024.0F
 //Voltage divider ratio
-#define VDIV_RATIO 4.8745
+#define VDIV_RATIO 0.2F
 
 #include <ESP8266WiFi.h>
 
 void setup() {
-  Serial.begin(9600, SERIAL_8N1);
+  Serial.begin(115200, SERIAL_8N1);
   delay(500);
   DEBUG_OUT(F("\n"));
 
@@ -52,7 +52,7 @@ void readVBAT() {
   };
 
   V[0] = adcRaw * ADC_LSB;
-  V[1] = V[0] * VDIV_RATIO;
+  V[1] = V[0] / VDIV_RATIO;
   for (uint8_t i = 1; i < 22; i++) {
     if (VlevelMap[i][1] > V[1]) {
       VBatPct = VlevelMap[i - 1][0];

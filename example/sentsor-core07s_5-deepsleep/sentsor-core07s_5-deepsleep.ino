@@ -13,8 +13,9 @@
 
 ===================================================================== */
 
-#define DEBUG_OUT(msg) Serial.print(msg)
 #define onboardLed 2
+//Sleep duration, unit in microseconds
+#define SLEEP_DURATION 5*1e+6
 
 #include <ESP8266WiFi.h>
 #include <RTClib.h>
@@ -36,7 +37,7 @@ void loop() {
   digitalWrite(onboardLed, LOW);
   delay(5000);
   digitalWrite(onboardLed, HIGH);
-  ESP.deepSleep(1e+7);
+  ESP.deepSleep(SLEEP_DURATION);
 }
 
 // End of File [SENTSOR]

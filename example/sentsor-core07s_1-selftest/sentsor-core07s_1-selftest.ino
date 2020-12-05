@@ -26,7 +26,7 @@ RTC_DS3231 rtc;
 
 void setup() {
   //Start serial and begin the test
-  Serial.begin(9600, SERIAL_8N1);
+  Serial.begin(115200, SERIAL_8N1);
   delay(500);
   DEBUG_OUT(F("\n\nSENTSOR Core Board ESP-07S Self-Test\n"));
   delay(500);
@@ -65,7 +65,7 @@ void setup() {
     DEBUG_OUT(F("OK\n"));
     delay(500);
 
-    SDFile file;
+    File file;
     const char filename[15] = "sentsor.txt";
     char text[30] = "Hello from SENTSOR Board!";
 
@@ -135,7 +135,8 @@ void setup() {
   WiFi.forceSleepWake();
   WiFi.mode(WIFI_STA);
   delay(1000);
-  DEBUG_OUT(F("OK\n"));
+  DEBUG_OUT(F("OK "));
+  DEBUG_OUT("(" + WiFi.macAddress() + ")\n");
 
   DEBUG_OUT(F("DEBUG >> Scanning WiFi access point... "));
   uint8_t networkFound = WiFi.scanNetworks();

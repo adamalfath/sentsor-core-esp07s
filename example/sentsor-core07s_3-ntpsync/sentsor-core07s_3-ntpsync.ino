@@ -36,7 +36,7 @@ RTC_DS3231 rtc;
 boolean RTCsync = false;
 
 void setup() {
-  Serial.begin(9600, SERIAL_8N1);
+  Serial.begin(115200, SERIAL_8N1);
   delay(500);
   DEBUG_OUT(F("\n"));
 
