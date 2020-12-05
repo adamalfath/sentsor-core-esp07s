@@ -14,7 +14,7 @@ SENTSOR Core Board ESP-07S merupakan development board yang dioptimasi untuk mel
 - **Castellated holes & pin header**, pilihan koneksi untuk mempermudah pengaplikasian board SENTSOR Core pada setiap kebutuhan.  
 - **ESP8266 SOC**, 32-bit MCU dan 4MB flash dengan clock up to 160MHz.  
 - **802.11b/g/n WiFi connectivity**, support mode STA/AP/STA+AP dengan antena external via konektor U.FL/IPEX memungkinkan board SENTSOR Core ESP07-S ditanam didalam enclosure metal tanpa menggangu kualitas sinyal transceiver.  
-- **Low Power**, down to 182uA saat deep sleep dan 16.2mA saat modem sleep (konsumsi gabungan ESP8266+DS3231 @ VCC=3.3V).  
+- **Low Power**, down to 62uA (deep sleep ESP8266 only), 182uA (deep sleep ESP8266+DS3231) dan 16.2mA (modem sleep ESP8266+DS3231).  
 - **DS3231 Extremely Accurate RTC**, terhubung via I2C pada alamat 0x68.  
 - **MicroSD socket**, terhubung via SPI dengan slave select (SS) pada pin IO15.  
 - **Built-in LED**, terhubung pada pin IO2, konfigurasi active-low.  
