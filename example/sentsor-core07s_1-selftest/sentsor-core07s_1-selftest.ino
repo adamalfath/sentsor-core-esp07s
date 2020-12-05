@@ -59,7 +59,7 @@ void setup() {
     delay(500);
   }
 
-  //SD test: SD init with slave select (SS) at pin 10, write/read/delete file
+  //SD test: SD init with slave select (SS) at pin 15, write/read/delete file
   DEBUG_OUT(F("DEBUG >> Initializing memory card... "));
   if (sd.begin(ssPin)) {
     DEBUG_OUT(F("OK\n"));
